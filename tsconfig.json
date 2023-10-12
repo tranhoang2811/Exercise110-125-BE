@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "target": "es2016",
+    "module": "commonjs",
+    "outDir": "./dist",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true,
+    // "baseUrl": "./",
+    // "paths": {
+    //   "utils/*": ["src/utils/*"],
+    //   "controllers/*": ["src/controllers/*"],
+    //   "interface/*": ["src/interface/*"],
+    //   "routes/*": ["src/routes/*"],
+    // }
+  },
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
+}
