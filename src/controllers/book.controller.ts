@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { IBook } from "../interface/book";
 import { getValidArray, readFile, writeFile } from "../utils/common";
 
+// *INFO: Exercise 113
 export async function list(
   request: Request,
   response: Response
@@ -11,6 +12,7 @@ export async function list(
   return response.status(200).json(books);
 }
 
+// *INFO: Exercise 115
 export async function detail(
   request: Request,
   response: Response
@@ -27,6 +29,7 @@ export async function detail(
   return response.status(200).json(selectedBook);
 }
 
+// *INFO: Exercise 117
 export async function create(
   request: Request,
   response: Response
@@ -45,6 +48,7 @@ export async function create(
   return response.status(200).json(newBook);
 }
 
+// *INFO: Exercise 119
 export async function replace(
   request: Request,
   response: Response
@@ -64,6 +68,7 @@ export async function replace(
   response.status(204).end();
 }
 
+// *INFO: Exercise 121
 export async function remove(
   request: Request,
   response: Response

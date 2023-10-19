@@ -4,6 +4,7 @@ import fileUpload from "express-fileupload";
 import router from "./routes";
 import { PORT } from "./config";
 
+// *INFO: Exercise 110-112
 const app: Express = express();
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
 

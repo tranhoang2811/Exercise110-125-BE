@@ -3,6 +3,7 @@ import { UploadedFile } from "express-fileupload";
 import path from "path";
 import { getValidArray } from "../utils/common";
 
+// *INFO: Exercise 123
 export function uploadSingleFile(
   request: Request,
   response: Response
@@ -13,7 +14,7 @@ export function uploadSingleFile(
   }
   const filePath: string = path.join(__dirname, `../../uploads/${image.name}`);
   image.mv(filePath);
-  return response.status(200).end();
+  return response.status(204).end();
 }
 
 export function uploadMultipleFiles(
@@ -31,9 +32,10 @@ export function uploadMultipleFiles(
     );
     image.mv(filePath);
   });
-  return response.status(200).end();
+  return response.status(204).end();
 }
 
+// *INFO: Exercise 124
 export function getImage(request: Request, response: Response): void {
   const { fileName } = request.params;
   const filePath: string = path.join(__dirname, `../../uploads/${fileName}`);
