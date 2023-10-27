@@ -7,7 +7,7 @@ export async function list(
   request: Request,
   response: Response
 ): Promise<Response<IBook[]>> {
-  const jsonBooks: string = await readFile("./src/constants.json");
+  const jsonBooks: string = await readFile("./src/books.json");
   const books: IBook[] = getValidArray(JSON.parse(jsonBooks));
   return response.status(200).json(books);
 }
@@ -18,7 +18,7 @@ export async function detail(
   response: Response
 ): Promise<Response<IBook | string>> {
   const { id } = request.params;
-  const jsonBooks: string = await readFile("./src/constants.json");
+  const jsonBooks: string = await readFile("./src/books.json");
   const books: IBook[] = getValidArray(JSON.parse(jsonBooks));
   const selectedBook: IBook | undefined = getValidArray(books).find(
     (book: IBook) => book?.BookId === id
@@ -35,7 +35,7 @@ export async function create(
   response: Response
 ): Promise<Response<IBook>> {
   const newBook: IBook = request.body;
-  const jsonBooks: string = await readFile("./src/constants.json");
+  const jsonBooks: string = await readFile("./src/books.json");
   const books: IBook[] = getValidArray(JSON.parse(jsonBooks));
   const selectedBook: IBook | undefined = getValidArray(books).find(
     (book: IBook) => book?.BookId === newBook?.BookId
@@ -44,7 +44,7 @@ export async function create(
     return response.status(409).end("BookId already exists");
   }
   books.push(newBook);
-  await writeFile("./src/constants.json", JSON.stringify(books));
+  await writeFile("./src/books.json", JSON.stringify(books));
   return response.status(200).json(newBook);
 }
 
@@ -55,7 +55,7 @@ export async function replace(
 ): Promise<void> {
   const { id } = request.params;
   const newBook: IBook = request.body;
-  const jsonBooks: string = await readFile("./src/constants.json");
+  const jsonBooks: string = await readFile("./src/books.json");
   const books: IBook[] = getValidArray(JSON.parse(jsonBooks));
   const bookIndex: number = books.findIndex(
     (book: IBook) => book?.BookId === id
@@ -64,7 +64,7 @@ export async function replace(
     response.status(404).end("Book not found");
   }
   books[bookIndex] = { ...newBook, BookId: id };
-  await writeFile("./src/constants.json", JSON.stringify(books));
+  await writeFile("./src/books.json", JSON.stringify(books));
   response.status(204).end();
 }
 
@@ -74,12 +74,12 @@ export async function remove(
   response: Response
 ): Promise<void> {
   const { id } = request.params;
-  const jsonBooks: string = await readFile("./src/constants.json");
+  const jsonBooks: string = await readFile("./src/books.json");
   const books: IBook[] = getValidArray(JSON.parse(jsonBooks));
   const newBooks: IBook[] = books.filter((book: IBook) => book?.BookId !== id);
   if (books?.length === newBooks?.length) {
     response.status(404).end("Book not found");
   }
-  await writeFile("./src/constants.json", JSON.stringify(newBooks));
+  await writeFile("./src/books.json", JSON.stringify(newBooks));
   response.status(204).end();
 }
